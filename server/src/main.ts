@@ -27,9 +27,9 @@ async function bootstrap() {
 
 
 
-  const port = process.env.PORT;
+  const port = parseInt(process.env.PORT, 1000) || 4000;
   await app.listen(port);
-  logger.log('App listening on port b ' + port);
+  logger.log('App listening on port developpement ' + port);
 }
 
 bootstrap();
