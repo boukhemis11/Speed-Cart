@@ -1,6 +1,10 @@
 {
   "name": "speed-cart",
   "version": "0.0.1",
+  "engines": {
+    "node": "12.16.3",
+    "npm": "6.14.4"
+  },
   "scripts": {
     "start:heroku": "node dist/eshop/server/main.js",
     "postinstall": "npm run build:ssr",
@@ -49,6 +53,7 @@
     "rimraf": "^3.0.2",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
+    "win-node-env": "^0.4.0",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
