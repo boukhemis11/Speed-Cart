@@ -1,10 +1,6 @@
 {
   "name": "speed-cart",
   "version": "0.0.1",
-  "engines": {
-    "node": "12.16.3",
-    "npm": "6.14.4"
-  },
   "scripts": {
     "start:heroku": "node dist/eshop/server/main.js",
     "postinstall": "npm run build:ssr",

@@ -29,7 +29,7 @@ async function bootstrap() {
 
   const port = process.env.PORT;
   await app.listen(port);
-  logger.log('App listening on port ' + port);
+  logger.log('App listening on port b ' + port);
 }
 
 bootstrap();
