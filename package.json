@@ -2,7 +2,8 @@
   "name": "speed-cart",
   "version": "0.0.1",
   "scripts": {
-    "prebuild": "rimraf dist",
+    "start:heroku": "node dist/eshop/server/main.js",
+    "postinstall": "npm run build:ssr",
     "build": "nest build --config ./server/nest-cli.json --path ./server/tsconfig.build.json",
     "format": "prettier --write \"server/**/*.ts\"",
     "start": "nest start config ./server/nest-cli.json --path ./server/tsconfig.json",
