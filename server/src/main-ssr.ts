@@ -16,7 +16,7 @@ async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppSSRModule);
   app.use(compression());
   app.use(bodyParser.json({ limit: '10mb' }));
-  app.use(bodyParser.urlencoded({ limit: '10mb' }));
+  app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
 
 
   app.use(
@@ -38,7 +38,7 @@ async function bootstrap() {
 
   const port = process.env.PORT;
   await app.listen(port);
-  logger.log('App listening on port ' + port);
+  logger.log('App listening on port b' + port || 4000);
 }
 
 // Webpack will replace 'require' with '__webpack_require__'
