@@ -35,7 +35,7 @@ async function bootstrap() {
 
 
 
-  const port = parseInt(process.env.PORT, 1000) || 4000;
+  const port = process.env.PORT;
   await app.listen(port);
   logger.log('App listening on port production ' + port || 4000);
 }
