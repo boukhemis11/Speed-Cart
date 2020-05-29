@@ -2,7 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { AppSSRModule } from './app-ssr.module';
 import { Logger } from '@nestjs/common';
-
+import * as cookieParser from 'cookie-parser';
 import * as mongoose from 'mongoose';
 
 import * as cors from 'cors';
@@ -15,8 +15,9 @@ async function bootstrap() {
 
   const app = await NestFactory.create<NestExpressApplication>(AppSSRModule);
   app.use(compression());
+  app.use(bodyParser.json({ limit: '10mb' }));
   app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
-
+  app.use(cookieParser());
 
   app.use(
     cors({
@@ -31,6 +32,7 @@ async function bootstrap() {
       useUnifiedTopology: true,
     });
     mongoose.set('useFindAndModify', false);
+    console.log('mongoose connect');
   }
 
 
