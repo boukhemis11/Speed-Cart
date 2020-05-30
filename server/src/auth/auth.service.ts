@@ -9,6 +9,7 @@ import {
 } from '@nestjs/common';
 
 import { User } from './models/user.model';
+import { GoogleUserDto } from './dto/google-user.dto';
 import { AuthCredentialDto } from './dto/auth-credential.dto';
 import { JwtPayload } from './models/jwt-payload.interface';
 
@@ -21,7 +22,7 @@ export class AuthService {
 
   async signUp(authCredentialsDto: AuthCredentialDto): Promise<void> {
     const { email, password } = authCredentialsDto;
-    const userExist = await Promise.resolve( this.userModel.findOne({email}));
+    const userExist = await Promise.resolve( this.userModel.findOne({email}) as any);
     if (userExist) {
       throw new ConflictException('Username already exist');
     }
@@ -55,6 +56,30 @@ export class AuthService {
     const accessToken = await Promise.resolve( this.jwtService.sign(payload) as any);
 
     return { accessToken, id: user._id, roles: user.roles, email };
+  }
+
+
+  async signInGoogle(googleUserDto: GoogleUserDto) {
+    const {email, profile} = googleUserDto;
+    const user = await Promise.resolve(  this.userModel.findOne({email}));
+
+    if (!user) {
+      const googleUser = await Promise.resolve( new this.userModel({email, googleId: profile.id}) as any);
+      googleUser.save();
+    }
+
+    const payload: JwtPayload = { email };
+    const accessToken: string = await Promise.resolve( this.jwtService.sign(payload));
+
+    return accessToken;
+  }
+
+
+  async getGoogleUser(email: string, profile: any) {
+    const user = this.userModel.findOne({ email });
+    const googleUser = user || await Promise.resolve( new this.userModel({email, googleId: profile.id}));
+
+    return googleUser;
   }
 
 
