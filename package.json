@@ -19,7 +19,7 @@
     "dev:ssr": "ng run speed-cart:serve-ssr",
     "serve:ssr": "node dist/speed-cart/server/main.js",
     "prebuild:ssr": "ngcc",
-    "build:ssr": "ng build --prod && ng run speed-cart:server:production",
+    "build:ssr": "NODE_ENV=production ng build --prod && ng run speed-cart:server:production",
     "prerender": "ng run speed-cart:prerender",
     "release": "standard-version",
     "test": "jest",
